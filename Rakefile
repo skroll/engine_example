@@ -21,7 +21,7 @@ RDoc::Task.new(:rdoc) do |rdoc|
 end
 
 APP_RAKEFILE = File.expand_path("../test/dummy/Rakefile", __FILE__)
-load 'rails/tasks/engine.rake'
+#load 'rails/tasks/engine.rake'
 
 
 
@@ -36,5 +36,9 @@ Rake::TestTask.new(:test) do |t|
   t.verbose = false
 end
 
+# Load rake tasks in spec lib directory
+Dir[File.expand_path(File.join("..", "spec/lib/tasks"), __FILE__) + "/*.rake"].each do |file|
+  load file
+end
 
 task :default => :test
